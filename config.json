@@ -1,0 +1,5 @@
+{
+    "Name": "srv1",
+    "ListenAddress": ":8090",
+    "Limit": 2
+}
