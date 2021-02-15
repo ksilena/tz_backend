@@ -1,4 +1,4 @@
-class Packet {
+class Message {
 
     price = 0
     quantity = 0
@@ -6,7 +6,7 @@ class Packet {
     object = 0
     method = 0
 
-    generatePacket() {
+    generateMessage() {
         this.price = this.getRandomInt()
         this.quantity = this.getRandomInt()
         this.amount = this.getRandomInt()
@@ -19,22 +19,43 @@ class Packet {
     }
 }
 
-function sendPacket() {
-    console.log("sending...")
+function generateSendPacket() {
+    //console.log("sending....")
+    packetAmount = Math.floor(Math.random() * 10) + 1
+    packetArray = []
+    for (let i = 0; i < packetAmount; i++) {
+        p = new Message()
+        p.generateMessage()
+        packetArray.push(p)
+    }   
+    body = JSON.stringify(packetArray)
+    //console.log(body);
+    var request = new XMLHttpRequest();   
+    request.open("POST", '/upload', true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.send(body);
 }
 
-frequency = 2
-packetAmount = Math.floor(Math.random() * 10)
-ms = Math.floor(1000 / frequency)
+function onload(frequency) {
+        console.log("onload...")
+        console.log(frequency);
+        ms = Math.floor(1000 / frequency)
+        timerID = setInterval(generateSendPacket, ms)
+};
 
-//timerID = setInterval(sendPacket, ms)
+function loadConfig(url, callback) {
+    var request = new XMLHttpRequest();
+    request.open('GET', url);
+    request.onload = function() {
+        if (this.status == 200) {
+            obj = JSON.parse(this.responseText);
+            frequency = obj.frequency   
+            console.log(this.responseText); 
+            callback(frequency)
+        }
+    };
 
-packetArray = []
-for (let i = 0; i < packetAmount; i++) {
-    p = new Packet()
-    p.generatePacket()
-    packetArray.push(p)
+    request.send();
 }
-//p = new Packet()
-//p.generatePacket()
-console.log(JSON.stringify(packetArray))
+
+loadConfig("/client/config.json", onload)

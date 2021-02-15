@@ -1,5 +1,6 @@
 {
     "Name": "srv1",
+    "Path": "./client",
     "ListenAddress": ":8090",
     "Limit": 2
 }

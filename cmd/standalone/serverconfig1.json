@@ -1,0 +1,7 @@
+{
+    "ServerName": "srv1",
+    "ClientDir": "../../",
+    "Limit": 2,
+    "ListenAddress": ":8090",
+    "NextServer": "http://localhost:8091/upload"
+}

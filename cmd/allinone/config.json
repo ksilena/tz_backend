@@ -1,0 +1,19 @@
+{
+    "ClientDir": "../../",
+    "Limit": 2,
+    "ListenAddress": ":8090",
+    "Servers": [
+        {
+            "Name": "srv1",
+            "Limit": 1
+        },
+        {
+            "Name": "srv2",
+            "Limit": 1
+        },
+        {
+            "Name": "srv3",
+            "Limit": 1
+        }
+    ]
+}

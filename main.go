@@ -4,11 +4,14 @@ import (
 	"bytes"
 	"encoding/json"
 	"io/ioutil"
+
+	"github.com/ksilena/tz_backend.git/httpserver"
 )
 
 // Config структура конфигурационного файла http-сервера
 type Config struct {
 	Name          string
+	Path          string
 	ListenAddress string
 	Limit         int
 }
@@ -26,4 +29,6 @@ func main() {
 		panic(err)
 	}
 
+	httpserver := httpserver.New(config.Path, config.ListenAddress)
+	httpserver.Start()
 }

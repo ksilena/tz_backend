@@ -1,0 +1,6 @@
+{
+    "ServerName": "srv3",
+    "ClientDir": "../../",
+    "Limit": 2,
+    "ListenAddress": ":8092"
+}
